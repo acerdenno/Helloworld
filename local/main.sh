@@ -48,7 +48,7 @@ function run_job {
     ssh $USER_NAME@$HPC_ADDRESS << EOF
         # Log the start of the job
         echo "Job $JOB_NAME started at \$(date)" >> $STATUS_FILE
-
+cd.
         # Execute the job script
         echo "Executing job script..."
         bash $SCRIPT_FILE
