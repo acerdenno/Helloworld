@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default settings file
-SETTINGS_FILE="secrets"
+SETTINGS_FILE="settings"
 JOBS_DIR="jobs"
 STATUS_FILE="job_status.log"
 
@@ -47,19 +47,19 @@ function run_job {
     echo "Connecting to HPC system..."
     ssh $USER_NAME@$HPC_ADDRESS << EOF
         # Log the start of the job
-        echo "Job $JOB_NAME started at $(date)" >> $STATUS_FILE
+        echo "Job $JOB_NAME started at \$(date)" >> $STATUS_FILE
 
         # Execute the job script
         echo "Executing job script..."
         bash $SCRIPT_FILE
 
         # Log the end of the job
-        echo "Job $JOB_NAME completed at $(date)" >> $STATUS_FILE
+        echo "Job $JOB_NAME completed at \$(date)" >> $STATUS_FILE
 
         # End the interactive session
         echo "Ending interactive session..."
         exit
-    EOF
+EOF
 
     echo "Job $JOB_NAME is running. Logs are available in $JOB_LOG."
 }
