@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Request an interactive job
+echo "Requesting interactive job..."
+salloc -c $NODES -n $TASKS -t $TIME_LIMIT -p standard --mem=$RAM
+
+# Check storage availability
+echo "Checking available storage..."
+df -h
+
+# Load necessary modules
+echo "Loading R module..."
+module load R
+
+# Clone the repository if not already cloned
+echo "Cloning repository..."
+if [ ! -d "$REPO_NAME" ]; then
+    git clone $REPO_URL
+fi
+
+# Navigate to the repository directory
+cd $REPO_NAME
+
+# Pull the latest commits from the specified branch
+echo "Pulling latest commits from branch $BRANCH..."
+git checkout $BRANCH
+git pull origin $BRANCH
+
+# Run the R script
+echo "Running R script..."
+Rscript $R_SCRIPT
