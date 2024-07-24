@@ -57,3 +57,4 @@ pbmc3k_filtered_gene_bc_matrices
 
 # credentials and config of hpc
 *secrets*
+*.env
